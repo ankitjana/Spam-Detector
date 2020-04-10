@@ -1,4 +1,4 @@
-COMP 6721 Applied Artificial Intelligence (Winter 2020)
+  COMP 6721 Applied Artificial Intelligence (Winter 2020)
 Project Assignment #2
 Due date (Moodle Submission): Monday, April 27th
 Counts for 25% of the total course marks (half of the course project)
@@ -51,27 +51,3 @@ COMP 6721 Winter 2020 Project Assignment #2
 For example, your result file could look like the following:
 1 test-ham-00001.txt ham 0.004 0.001 ham right
 2 test-ham-00002.txt spam 0.002 0.03 ham wrong
-Report. You have to write a report on your work with the following information:
-Title page: showing your group information (team name, team members, ID numbers).
-Analysis: Provide a table of results showing the accuracy, precision, recall and F1-measure for each
-class (spam and ham), as well as a confusion matrix. Explain how you generated this table using
-your program. Discuss these results.
-Length: ca. 1 page
-Reference Section: containing citations to all relevant resources that you have consulted (books, Web
-sites, . . . ), even if it was just to inspire you. Failure to properly cite your references constitutes
-plagiarism and will be reported.
-Deliverables. Your submission must include the following deliverables within a single .zip or .tgz
-archive:
-Python code: All the Python code that you developed for this project.
-Generated output: The files model.txt, result.txt, as well as any additional files your program
-might use or create.
-README: A readme.txt (or readme.md) file that lists all submitted files with an explanation of their
-content. It also must describe how to run your code for (a) training and (b) testing (including
-generating the evaluation results provided in the report). If your instructions are incomplete and
-your code cannot be run you might not receive any marks for your work.
-Report: The project report, as detailed above, in PDF format.
-Submission. You must submit your code electronically on Moodle by the due date (late submission will
-incur a penalty, see Moodle for details). Only if your group members have changed from A1: Include a
-new, signed by all team members, Expectation of originality form (see https://www.concordia.ca/encs/
-students/sas/expectation-originality.html) with your submission.
-Demo. We will schedule online demos sessions for your project using Zoom.
