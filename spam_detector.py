@@ -84,7 +84,7 @@ for file in training_files:
     if file.find("spam") != -1:
         number_of_spam_documents += 1
 
-# the probabilty of document being ham or spam [prior probabilty]
+# the probability of document being ham or spam [prior probability]
 probability_ham = number_of_ham_documents/(number_of_spam_documents+number_of_ham_documents)
 probability_spam = number_of_spam_documents/(number_of_spam_documents+number_of_ham_documents)
 
@@ -121,7 +121,7 @@ for file in training_files:
                     ham_word_dictionary[word] = x
                 else:
                     ham_word_dictionary[word] = 1
-                # word is also added to spam dictionary if it does not exist with 0 probability
+                # word is also added to spam dictionary with 0 frequency if it does not exist in spam dict
                 if word not in spam_word_dictionary:
                     spam_word_dictionary[word] = 0
 
@@ -135,7 +135,7 @@ for file in training_files:
                 else:
                     spam_word_dictionary[word] = 1
 
-                # word is also added to ham dictionary if it does not exist with 0 probability
+                # word is also added to ham dictionary if it does not exist with 0 freq
                 if word not in ham_word_dictionary:
                     ham_word_dictionary[word] = 0
 
@@ -162,16 +162,16 @@ for i in spam_word_dictionary:
 p_spam = {}
 p_ham = {}
 
-# total number of unique words
+# size of vocabulary
 number_of_words = len(word_dictionary)
 
 
-# dictionary of ham word with conditional probabilites
+# dictionary of ham word with conditional probabilities
 # smoothing factor = 0.5
 for i in ham_word_dictionary:
     p_ham[i] = (ham_word_dictionary[i]+0.5)/(total_num_ham_words+0.5*total_words_count)
 
-# dictionary of spam word with conditional probabilites
+# dictionary of spam word with conditional probabilities
 for j in spam_word_dictionary:
     p_spam[j] = (spam_word_dictionary[j]+0.5)/(total_num_spam_words+0.5*total_words_count)
 
