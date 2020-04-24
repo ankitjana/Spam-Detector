@@ -180,6 +180,7 @@ word_dictionary = sort_dictionary(word_dictionary)
 
 if __name__ == "__main__":
     write_in_file(word_dictionary, ham_word_dictionary, spam_word_dictionary, p_ham, p_spam)
+    print('Model training is done. Please run model_evaluator.py for testing')
     '''
     print("****************************************************************************")
     print("Total number of Spam Documents in the training files:", number_of_spam_documents)

@@ -156,8 +156,6 @@ print_result(report)
 
 print("confusion matrix")
 print('       PREDICTED   ')
-print("confusion matrix matrix")
-print()
 print('      SPAM |  HAM  ')
 print('     --------------')
 print('SPAM| %4d | %4d |' %(confusion_matrix[0][0], confusion_matrix[0][1]))
@@ -187,4 +185,3 @@ print("Recall of the classification:  ", recall)
 
 f1 = 2*(percision*recall)/(percision+recall)
 print("f1 score of the classification:", f1)
-print()
