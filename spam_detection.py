@@ -101,7 +101,6 @@ for file in training_files:
             if len(word) == 0:
                 continue
 
-
             if word in word_dictionary:
                 x = word_dictionary[word]
                 x += 1

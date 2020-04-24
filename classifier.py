@@ -156,7 +156,7 @@ for file in testing_files:
 print_result(file_summary)
 
 print("confusion matrix")
-print()
+print('       PREDICTED   ')
 print('      SPAM |  HAM  ')
 print('     --------------')
 print('SPAM| %4d | %4d |'%(confusion[0][0], confusion[0][1]))
