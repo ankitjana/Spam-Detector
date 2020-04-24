@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="50c39b68-9da9-42df-b992-a5373c00dd74" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_evaluator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/result" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spam_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/spam_detector.py" afterDir="false" />
-    </list>
+    <list default="true" id="50c39b68-9da9-42df-b992-a5373c00dd74" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model_evaluator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="542">
-              <caret line="185" column="48" lean-forward="true" selection-start-line="185" selection-start-column="48" selection-end-line="185" selection-end-column="48" />
+            <state relative-caret-position="409">
+              <caret line="190" selection-start-line="190" selection-end-line="190" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -38,20 +32,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spam_detector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3247">
-              <caret line="191" column="7" selection-start-line="191" selection-start-column="7" selection-end-line="191" selection-end-column="7" />
+            <state relative-caret-position="409">
+              <caret line="192" selection-start-line="192" selection-end-line="192" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/part3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4063">
-              <caret line="239" column="12" selection-start-line="239" selection-start-column="6" selection-end-line="239" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -74,6 +59,7 @@
       <list>
         <option value="$PROJECT_DIR$/spam_detection.py" />
         <option value="$PROJECT_DIR$/classifier.py" />
+        <option value="$PROJECT_DIR$/spam_detector.py" />
         <option value="$PROJECT_DIR$/model_evaluator.py" />
       </list>
     </option>
@@ -247,7 +233,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18174000" />
+    <option name="totallyTimeSpent" value="18295000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -303,17 +289,11 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/part3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4063">
-          <caret line="239" column="12" selection-start-line="239" selection-start-column="6" selection-end-line="239" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/part3.py" />
     <entry file="file://$PROJECT_DIR$/model_evaluator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="185" column="48" lean-forward="true" selection-start-line="185" selection-start-column="48" selection-end-line="185" selection-end-column="48" />
+        <state relative-caret-position="409">
+          <caret line="190" selection-start-line="190" selection-end-line="190" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -322,8 +302,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spam_detector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3247">
-          <caret line="191" column="7" selection-start-line="191" selection-start-column="7" selection-end-line="191" selection-end-column="7" />
+        <state relative-caret-position="409">
+          <caret line="192" selection-start-line="192" selection-end-line="192" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
