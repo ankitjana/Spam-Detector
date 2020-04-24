@@ -11,7 +11,7 @@ your code cannot be run you might not receive any marks for your work.
 2.  result.txt: contains the testing results. It includes the name of each test file, its label (spam or ham) done by the model, its spam and ham score, the expected label and whether the model's classification is right or wrong
 3.  spam_detection.py: contains our code implementation for model training. The program processes all of the training files in the *train* directory, trains the model and outputs the training results to model.txt.
 4.  model_evaluator.py: contains our code implementation for model testing. The program processes all of the testing files in the *test* directory and outputs the results to model.txt.
-5.  report.pdf: contains the report of this project.
+5.  project_report.pdf: contains the report of this project.
 6.  readme.md: this readme file
 
 ## How to run the program
