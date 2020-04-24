@@ -1,15 +1,13 @@
 import os
-from os import listdir
-from os.path import isfile, join
 from os import walk
 import re
 from math import log10
+from spam_detector import word_dictionary, p_ham, p_spam, probability_ham, probability_spam
 
-from spam_detection import word_dictionary, ham_word_dictionary, spam_word_dictionary, p_ham, p_spam, probability_ham, probability_spam
-
-# getting the current path
+# current path
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
+# testing files
 testing_path = os.path.join(dir_path, 'test')
 
 
@@ -26,54 +24,56 @@ for i in testing_files:
     if i.find("spam") != -1:
         spam_testing_files.append(i)
 
-def print_result(file_summary):
-    print_to_console = input("would you like to print file output to the console (0 for no 1 for yes) >")
-    f = open("baseline-result.txt", "w+")
+def print_result(report):
+    #print_to_console = input("would you like to print file output to the console (0 for no 1 for yes) >")
+    f = open("result.txt", "w+")
 
     # calculate accuracy of the classification
     wrongCounter = 0
     rightCounter = 0
 
     counter = 0
-    for file_name in file_summary:
+    for file_name in report:
         counter += 1
+
+        '''
         if print_to_console == '1':
             print(counter, end="  ")
             print(file_name, end="  ")
-            print(file_summary[file_name]["classification"], end="  ")
-            print(file_summary[file_name]["ham_score"], end="  ")
-            print(file_summary[file_name]["spam_score"], end="  ")
-            print(file_summary[file_name]["result"])
-
+            print(report[file_name]["classification"], end="  ")
+            print(report[file_name]["ham_score"], end="  ")
+            print(report[file_name]["spam_score"], end="  ")
+            print(report[file_name]["result"])
+        '''
         f.write(str(counter))
         f.write("  ")
         f.write(str(file_name))
         f.write("  ")
-        f.write(str(file_summary[file_name]["classification"]))
+        f.write(str(report[file_name]["classification"]))
         f.write("  ")
-        f.write(str(file_summary[file_name]["ham_score"]))
+        f.write(str(report[file_name]["ham_score"]))
         f.write("  ")
-        f.write(str(file_summary[file_name]["spam_score"]))
+        f.write(str(report[file_name]["spam_score"]))
         f.write("  ")
-        f.write(str(file_summary[file_name]["result"]))
+        f.write(str(report[file_name]["result"]))
         f.write("\n")
 
-        if file_summary[file_name]["result"] == "wrong":
+        if report[file_name]["result"] == "wrong":
             wrongCounter += 1
-        elif file_summary[file_name]["result"] == "right":
+        elif report[file_name]["result"] == "right":
             rightCounter += 1
         else:
             print("ERROR")
             break
     accuracy = rightCounter/(rightCounter + wrongCounter)
-    print("--------------------------accurracy--------------------------")
+    print("--------------------------Accurracy--------------------------")
     print(accuracy*100, ' % ')
     print("--------------------------accurracy--------------------------")
 
     f.close()
 
 
-def getWords(file_path):
+def createWordList(file_path):
     result_words = []
 
     f = open(file_path, 'r', encoding="latin-1")
@@ -84,8 +84,7 @@ def getWords(file_path):
 
         for word in words:
 
-            # ignore the word if there is no word on that line
-            # a line was only skipped
+            # ignore empty lines
             if len(word) == 0:
                 continue
 
@@ -96,12 +95,12 @@ def getWords(file_path):
     return result_words
 
 
-confusion = [[0,0],[0,0]]
+confusion_matrix = [[0,0],[0,0]]
 
-file_summary = {}
+report = {}
 for file in testing_files:
     path_to_file = os.path.join(testing_path, file)
-    words = getWords(path_to_file)
+    words = createWordList(path_to_file)
 
     classification = ""
     actual_classification = ""
@@ -130,56 +129,62 @@ for file in testing_files:
 
     # true positive
     if actual_classification=="spam" and classification=="spam":
-        confusion[0][0] += 1
+        confusion_matrix[0][0] += 1
 
     # true negative
     if actual_classification=="ham" and classification=="ham":
-        confusion[1][1] += 1
+        confusion_matrix[1][1] += 1
 
     # false positive
     if classification=="spam" and actual_classification=="ham":
-        confusion[0][1] +=1
+        confusion_matrix[0][1] +=1
 
     # false negative
     if classification=="ham" and actual_classification=="spam":
-        confusion[1][0] +=1
+        confusion_matrix[1][0] +=1
 
     # lets make a file summary storing necessary info like ham score, spam score, .. etc so it can be easily outputted
-    file_summary[file] = {}
-    file_summary[file]['spam_score'] = probability_email_spam
-    file_summary[file]['ham_score'] = probability_email_ham
-    file_summary[file]['classification'] = classification
-    file_summary[file]['actual_classification'] = actual_classification
-    file_summary[file]['result'] = result
+    report[file] = {}
+    report[file]['spam_score'] = probability_email_spam
+    report[file]['ham_score'] = probability_email_ham
+    report[file]['classification'] = classification
+    report[file]['actual_classification'] = actual_classification
+    report[file]['result'] = result
 
 
-print_result(file_summary)
+print_result(report)
 
 print("confusion matrix")
 print('       PREDICTED   ')
+print("confusion matrix matrix")
+print()
 print('      SPAM |  HAM  ')
 print('     --------------')
-print('SPAM| %4d | %4d |'%(confusion[0][0], confusion[0][1]))
-print('HAM | %4d | %4d |' %(confusion[1][0], confusion[1][1]))
+print('SPAM| %4d | %4d |' %(confusion_matrix[0][0], confusion_matrix[0][1]))
+print('HAM | %4d | %4d |' %(confusion_matrix[1][0], confusion_matrix[1][1]))
 print('     --------------')
 
-true_positive = confusion[0][0]
-false_positive = confusion[0][1]
-false_negative = confusion[1][0]
-true_negative = confusion[1][1]
+true_positive = confusion_matrix[0][0]
+false_positive = confusion_matrix[0][1]
+false_negative = confusion_matrix[1][0]
+true_negative = confusion_matrix[1][1]
 
+print("True Positive: ", true_positive)
+print("False Positive: ", false_positive)
+print("False Negative: ", false_negative)
+print("True Negative: ", true_negative)
 
-total_emails = confusion[0][0] + confusion[0][1] + confusion[1][0] + confusion[1][1]
+total_emails = confusion_matrix[0][0] + confusion_matrix[0][1] + confusion_matrix[1][0] + confusion_matrix[1][1]
 
-accuracy = (confusion[0][0] + confusion[1][1])/total_emails
-print("accuracy >> ", accuracy)
+accuracy = (confusion_matrix[0][0] + confusion_matrix[1][1])/total_emails
+print("Accuracy of the classification:  ", accuracy)
 
 percision = true_positive/(true_positive+false_positive)
-print("percision >> ", percision )
+print("Precision of the classification:  ", percision )
 
 recall = true_positive/(true_positive+false_negative)
-print("recall >> ", recall)
+print("Recall of the classification:  ", recall)
 
 f1 = 2*(percision*recall)/(percision+recall)
-print("f1 >> ", f1)
+print("f1 score of the classification:", f1)
 print()
