@@ -88,7 +88,7 @@ def createWordList(file_path):
             if len(word) == 0:
                 continue
 
-            # is the word is already in our result dictionay increment frequency
+            # is the word is already in our result dictionary increment frequency
             # else set frequency to 1
             result_words.append(word)
     f.close()
@@ -104,6 +104,7 @@ for file in testing_files:
 
     classification = ""
     actual_classification = ""
+    # Initialize with the prior probability
     probability_email_spam = log10(probability_ham)
     probability_email_ham = log10(probability_spam)
     for word in words:
@@ -143,7 +144,7 @@ for file in testing_files:
     if classification=="ham" and actual_classification=="spam":
         confusion_matrix[1][0] +=1
 
-    # lets make a file summary storing necessary info like ham score, spam score, .. etc so it can be easily outputted
+    # report storing necessary info like ham score, spam score
     report[file] = {}
     report[file]['spam_score'] = probability_email_spam
     report[file]['ham_score'] = probability_email_ham
@@ -179,12 +180,12 @@ total_emails = confusion_matrix[0][0] + confusion_matrix[0][1] + confusion_matri
 accuracy = (confusion_matrix[0][0] + confusion_matrix[1][1])/total_emails
 print("Accuracy of the classification:  ", accuracy)
 
-percision = true_positive/(true_positive+false_positive)
-print("Precision of the classification:  ", percision )
+precision = true_positive/(true_positive+false_positive)
+print("Precision of the classification:  ", precision )
 
 recall = true_positive/(true_positive+false_negative)
 print("Recall of the classification:  ", recall)
 
-f1 = 2*(percision*recall)/(percision+recall)
+f1 = 2*(precision*recall)/(precision+recall)
 print("f1 score of the classification:", f1)
 print()
