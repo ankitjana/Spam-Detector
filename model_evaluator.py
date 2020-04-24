@@ -155,15 +155,13 @@ for file in testing_files:
 
 print_result(report)
 
-'''
-print("confusion matrix matrix")
-print()
+print("confusion matrix")
+print('       PREDICTED   ')
 print('      SPAM |  HAM  ')
 print('     --------------')
-print('SPAM| %4d | %4d |'%(confusion matrix[0][0], confusion matrix[0][1]))
-print('HAM | %4d | %4d |' %(confusion matrix[1][0], confusion matrix[1][1]))
+print('SPAM| %4d | %4d |' %(confusion_matrix[0][0], confusion_matrix[0][1]))
+print('HAM | %4d | %4d |' %(confusion_matrix[1][0], confusion_matrix[1][1]))
 print('     --------------')
-'''
 
 true_positive = confusion_matrix[0][0]
 false_positive = confusion_matrix[0][1]
@@ -188,4 +186,3 @@ print("Recall of the classification:  ", recall)
 
 f1 = 2*(precision*recall)/(precision+recall)
 print("f1 score of the classification:", f1)
-print()
