@@ -1,7 +1,6 @@
 import os
 from os import walk
-import re
-from math import log10
+
 from spam_detector import word_dictionary, p_ham, p_spam, probability_ham, probability_spam
 
 # current path
