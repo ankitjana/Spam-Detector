@@ -5,10 +5,10 @@ from math import log10
 
 
 # current directory
-dir_path = os.path.dirname(os.path.realpath(__file__))
+dir = os.path.dirname(os.path.realpath(__file__))
 
 # training files
-training_path = os.path.join(dir_path, 'train')
+training_path = os.path.join(dir, 'train')
 
 
 
@@ -23,7 +23,7 @@ spam_dict is a dictionary with the conditional probabilities of all spam words
 '''
 
 
-def write_in_file(word_dict, ham_dict, spam_dict, p_ham, p_spam):
+def write_to_file(word_dict, ham_dict, spam_dict, p_ham, p_spam):
     f = open("model.txt", "w+")
     counter = 0
     for word in word_dict:
@@ -63,26 +63,26 @@ for (dirpath, dirnames, filenames) in walk(training_path):
     training_files.extend(filenames)
 
 word_dictionary = {}
-ham_word_dictionary = {}
-spam_word_dictionary = {}
+ham_dictionary = {}
+spam_dictionary = {}
 
-number_of_spam_documents = 0
-number_of_ham_documents = 0
+num_spam_docs = 0
+num_ham_docs = 0
 
 for file in training_files:
     if file.find("ham") != -1:
-        number_of_ham_documents += 1
+        num_ham_docs += 1
     if file.find("spam") != -1:
-        number_of_spam_documents += 1
+        num_spam_docs += 1
 
 # the probability of document being ham or spam [prior probability]
-probability_ham = number_of_ham_documents/(number_of_spam_documents+number_of_ham_documents)
-probability_spam = number_of_spam_documents/(number_of_spam_documents+number_of_ham_documents)
+prob_ham = num_ham_docs / (num_spam_docs + num_ham_docs)
+prob_spam = num_spam_docs / (num_spam_docs + num_ham_docs)
 
 
 for file in training_files:
-    path_to_file = os.path.join(training_path, file)
-    train_f = open(path_to_file, 'r', encoding="latin-1")
+    file_path = os.path.join(training_path, file)
+    train_f = open(file_path, 'r', encoding="latin-1")
     for line in train_f:
         line = line.lower()
         # print(line, end=" -> ")
@@ -103,29 +103,29 @@ for file in training_files:
             # check if the file is a ham file
             if file.find("ham") != -1:
                 # if the word is already in the ham dictionary increment the frequency
-                if word in ham_word_dictionary:
-                    x = ham_word_dictionary[word]
+                if word in ham_dictionary:
+                    x = ham_dictionary[word]
                     x += 1
-                    ham_word_dictionary[word] = x
+                    ham_dictionary[word] = x
                 else:
-                    ham_word_dictionary[word] = 1
+                    ham_dictionary[word] = 1
                 # word is also added to spam dictionary with 0 frequency if it does not exist in spam dict
-                if word not in spam_word_dictionary:
-                    spam_word_dictionary[word] = 0
+                if word not in spam_dictionary:
+                    spam_dictionary[word] = 0
 
             # if the file is a spam file
             if file.find("spam") != -1:
                 # if the word is already in spam dictionary increment the frequency
-                if word in spam_word_dictionary:
-                    x = spam_word_dictionary[word]
+                if word in spam_dictionary:
+                    x = spam_dictionary[word]
                     x += 1
-                    spam_word_dictionary[word] = x
+                    spam_dictionary[word] = x
                 else:
-                    spam_word_dictionary[word] = 1
+                    spam_dictionary[word] = 1
 
                 # word is also added to ham dictionary if it does not exist with 0 freq
-                if word not in ham_word_dictionary:
-                    ham_word_dictionary[word] = 0
+                if word not in ham_dictionary:
+                    ham_dictionary[word] = 0
 
 
 # count the total frequency of words in both ham and spam files
@@ -134,14 +134,14 @@ for i in word_dictionary:
     total_words_count += word_dictionary[i]
 
 # count the total frequency of ham words only ham files
-total_num_ham_words = 0
-for i in ham_word_dictionary:
-    total_num_ham_words += ham_word_dictionary[i]
+total_ham_words = 0
+for i in ham_dictionary:
+    total_ham_words += ham_dictionary[i]
 
 # count the total frequency of spam words only in spam files
-total_num_spam_words = 0
-for i in spam_word_dictionary:
-    total_num_spam_words += spam_word_dictionary[i]
+total_spam_words = 0
+for i in spam_dictionary:
+    total_spam_words += spam_dictionary[i]
 
 
 # the probabilities of each word in its set
@@ -149,41 +149,41 @@ p_spam = {}
 p_ham = {}
 
 # size of vocabulary
-number_of_words = len(word_dictionary)
+vocab_size = len(word_dictionary)
 
 
 # dictionary of ham word with conditional probabilities
 # smoothing factor = 0.5
-for i in ham_word_dictionary:
-    p_ham[i] = (ham_word_dictionary[i]+0.5)/(total_num_ham_words+0.5*total_words_count)
+for i in ham_dictionary:
+    p_ham[i] = (ham_dictionary[i] + 0.5) / (total_ham_words + 0.5 * total_words_count)
 
 # dictionary of spam word with conditional probabilities
-for j in spam_word_dictionary:
-    p_spam[j] = (spam_word_dictionary[j]+0.5)/(total_num_spam_words+0.5*total_words_count)
+for j in spam_dictionary:
+    p_spam[j] = (spam_dictionary[j] + 0.5) / (total_spam_words + 0.5 * total_words_count)
 
 # sorts the word dictionary alphabetically
 word_dictionary = sort_dictionary(word_dictionary)
 
 # write model.txt file
-write_in_file(word_dictionary, ham_word_dictionary, spam_word_dictionary, p_ham, p_spam)
+write_to_file(word_dictionary, ham_dictionary, spam_dictionary, p_ham, p_spam)
 
 
 # testing files
-testing_path = os.path.join(dir_path, 'test')
+testing_path = os.path.join(dir, 'test')
 
 
-testing_files = []
-ham_testing_files = []
-spam_testing_files = []
+test_files = []
+ham_test_files = []
+spam_test_files = []
 
 for (dirpath, dirnames, test_filenames) in walk(testing_path):
-    testing_files.extend(test_filenames)
+    test_files.extend(test_filenames)
 
-for i in testing_files:
+for i in test_files:
     if i.find("ham") != -1:
-        ham_testing_files.append(i)
+        ham_test_files.append(i)
     if i.find("spam") != -1:
-        spam_testing_files.append(i)
+        spam_test_files.append(i)
 
 
 def print_result(summary):
@@ -244,23 +244,23 @@ def createWordList(file_path):
 confusion_matrix = [[0,0],[0,0]]
 
 report = {}
-for file_te in testing_files:
-    path_to_file_test = os.path.join(testing_path, file_te)
-    words = createWordList(path_to_file_test)
+for file_te in test_files:
+    test_file_path = os.path.join(testing_path, file_te)
+    words = createWordList(test_file_path)
 
     classification = ""
     actual_classification = ""
     # Initialize with the prior probability
-    probability_email_spam = log10(probability_ham)
-    probability_email_ham = log10(probability_spam)
+    prob_email_spam = log10(prob_ham)
+    prob_email_ham = log10(prob_spam)
     for word in words:
         if word not in word_dictionary:
             continue
         # need to calculate probabilities
-        probability_email_spam += log10(p_spam[word])
-        probability_email_ham += log10(p_ham[word])
+        prob_email_spam += log10(p_spam[word])
+        prob_email_ham += log10(p_ham[word])
 
-    if probability_email_spam >= probability_email_ham:
+    if prob_email_spam >= prob_email_ham:
         classification = "spam"
     else:
         classification = "ham"
@@ -292,8 +292,8 @@ for file_te in testing_files:
 
     # report storing necessary info like ham score, spam score
     report[file_te] = {}
-    report[file_te]['spam_score'] = probability_email_spam
-    report[file_te]['ham_score'] = probability_email_ham
+    report[file_te]['spam_score'] = prob_email_spam
+    report[file_te]['ham_score'] = prob_email_ham
     report[file_te]['classification'] = classification
     report[file_te]['actual_classification'] = actual_classification
     report[file_te]['result'] = result
